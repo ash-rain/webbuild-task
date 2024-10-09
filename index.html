@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebBuild Task - Boyan Balkanski</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .btn {
+                @apply w-full p-4 rounded bg-gradient-to-b from-slate-200 to-slate-300 hover:from-white border border-slate-500 hover:border-slate-900;
+            }
+            .money {
+                @apply font-mono text-orange-500;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-500">
+    <header class="p-4 bg-slate-100">
+        <h1 class="text-2xl text-center">Vending Machine</h1>
+    </header>
+    <main id="app" class="p-8 bg-gradient-to-br from-slate-300 via-slate-100 to-slate-400">
+        <div class="grid grid-cols-5 gap-24" v-if="!loading">
+            <div class="col-span-3">
+                <div class="grid grid-cols-2 gap-8">
+                    <div v-for="drink in drinks">
+                        <button class="btn" @click="buyDrink(drink.name)">
+                            <h2 class="text-xl">{{ drink.name }}</h2>
+                            <p class="money">{{ drink.price }}</p>
+                        </button>
+                    </div>
+                </div>
+            </div>  
+            <div class="money col-span-2">
+                <p class="px-4 py-2 text-xl bg-gray-700 text-center">
+                    {{ balance }}
+                </p>
+
+                <div class="my-8 flex justify-between gap-4">
+                    <button class="btn" @click="putCoin(0.1)">+ 0.10</button>
+                    <button class="btn" @click="putCoin(0.2)">+ 0.20</button>
+                    <button class="btn" @click="putCoin(0.5)">+ 0.50</button>
+                    <button class="btn" @click="putCoin(1.0)">+ 1.00</button>
+                </div>
+
+                <button class="btn text-black" @click="returnChange">Return Change</button>
+            </div>
+        </div>
+    </main>
+    <footer class="p-4">
+        <p class="text-center text-white">
+            &copy; 10.10.2024
+            <br>
+            <a class="underline" target="_blank" href="https://github.com/ash-rain">Boyan Balkanski</a>
+        </p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
